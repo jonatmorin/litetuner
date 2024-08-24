@@ -1,0 +1,111 @@
+body {
+    background: black;
+    height: 100dvh;
+    display: flex;
+}
+
+guitar-tuner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    background: #988f90;
+    border-radius: 24px;
+    padding: 24px;
+    width: fit-content;
+    margin:auto;
+}
+
+.leds {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    color: #242424;
+
+    .flat, .sharp {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.led {
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+}
+
+.led__sharp, .led__flat, .led__accurate{
+    background: darkslategrey
+}
+
+.frequencies {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.frequency {
+    width: 100px;
+    height: 300px;
+    background: gray;
+}
+
+.screen{
+    background: #767064;
+    width: 150px;
+    color: #767064;
+    margin:auto;
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    
+
+    .pitch {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+
+
+guitar-tuner[data-power="true"] {
+    .pitch, .note {
+        color: #26261e;
+    }
+
+    .led__sharp.active, .led__flat.active {
+    background: rgb(255, 1, 1);
+}
+
+.led__accurate.active {
+    background: rgb(0, 211, 0);
+}
+    
+     
+}
+
+.power {
+   display: flex;
+   flex-direction: row;
+   gap: 12px;
+   align-items: center;
+   font-size: 12px;
+   background: transparent;
+   border:none;
+}
+
+.power:before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    background: #b60b32;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}

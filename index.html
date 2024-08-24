@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litetuner</title>
+    <link rel="stylesheet" href="./assets/tuner.css">
+    <script type="module" src="./assets/tuner.js"></script>
+</head>
+<body>
+    <guitar-tuner data-power="false">
+        <div>
+            <div class="leds">
+                <div class="flat">
+                    <span>♭</span>
+                    <div class="led led__flat"></div>
+                </div>
+                
+                <div class="led led__accurate"></div>
+                <div class="sharp">
+                    <div class="led led__sharp"></div>
+                    <span>#</span>
+                </div>
+            </div>
+            <div class="screen">
+                <div class="pitch">
+                    <span id="pitch"></span>
+                    <span>Hz</span>
+                </div>
+                <div class="note">
+                    <span id="note"></span>
+                </div>
+            </div>
+    
+            <div class="meter"></div>
+        </div>
+        <div>
+            <button id="powerButton" class="power">ON/OFF</div>
+        </div>
+    </guitar-tuner>
+    
+</body>
+</html>
