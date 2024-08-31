@@ -1,3 +1,12 @@
+/* Variables */
+:root {
+    --background: #252323;
+    --text-color: #f5f1ed;
+    --accent-color: #f79824; /*#f51aa4; */
+} 
+
+/* Fonts */
+
 /* latin-ext */
 @font-face {
     font-family: 'New Amsterdam';
@@ -6,25 +15,27 @@
     font-display: swap;
     src: url(./fonts/new-amsterdam_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
+}
+/* latin */
+@font-face {
     font-family: 'New Amsterdam';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
     src: url(./fonts/new-amsterdam_latin.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
+}
+
+/* Resets and basic stylings */
 
 h1, h2, h3, h4, h5 ,h6 {
     font-family:  "New Amsterdam", sans-serif;
-    color: #f5f1ed;
+    color: var(--text-color);
 }
 
 p, span, a, ul, ol {
     font-family: 'Courier New', Courier, monospace;
-    color: #f5f1ed;
+    color: var(--text-color);
 }
 
 h1 {
@@ -33,65 +44,127 @@ h1 {
     font-size: 4em;
 }
 
-body {
-    background: #252323;
-    height: 100dvh;  
-}
-
-footer {
-    width: 100%;
-}
-
-.footer__repo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+a {
     text-decoration: none;
-    width: fit-content;
-    margin: auto;
-    overflow: hidden;
 }
 
-.footer__repo:hover .repo__text:after {
-    right: 0;
-}
-
-.repo__text {
-    margin-bottom: 16px;
+.text--animate-hover {
     position: relative;
+    text-decoration: none;
 }
 
-.repo__text::after {
+
+.text--animate-hover::after {
     content: '';
     display: block;
-    background: #f51aa4;
-    width: 100%;
+    background: var(--accent-color);
+    width: 0;
     height: 5px;
     right: 100%;
     position: absolute;
     transition: 300ms ease-out;
 }
 
+.text--animate-hover:hover::after {
+    right: 0;
+    width: 100%;
+}
+
+body {
+    background: var(--background);
+    height: 100dvh;  
+}
+
+footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24;
+}
+
+
+
+footer > * {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.footer__contact {
+    order: 0;
+    margin-bottom: 24px;
+}
+
+.footer__repo {
+    order: 1;
+}
+
+.repo__text {
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+
 .repo__logo {
     width: 48px;
     height: 48px;
+    margin:auto;
 }
 
+
+/* Guitar tuner styling */
+
 guitar-tuner {
+    max-width: 300px;
+    margin: auto;
+    display: flex; 
+    flex-direction: column;   
+    border: 1px solid var(--accent-color);
+    border-radius: 2em;
+    padding: 2em;
+    margin-bottom: 48px;
+}
+
+guitar-tuner .tuner__toggle {
+    width: 48px;
+    height: 24px;
+    background: var(--text-color);
+    border-radius: 24px;
+    margin-right: 0;
+    margin-left: auto;
+    margin-bottom: 48px;
+    cursor: pointer;
+}
+
+guitar-tuner .tuner__toggle .toggle__circle {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background-color: #7D7E75;
+}
+
+guitar-tuner[data-power="true"] .tuner__toggle .toggle__circle {
+    margin-left: auto;
+}
+
+guitar-tuner[data-power="true"] .tuner__toggle {
+    background: rgb(0, 211, 0);
+}
+
+guitar-tuner .wrapper {
+    background: #988f90;
+    padding: 24px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 16px;
-    background: #988f90;
+    
     border-radius: 24px;
-    padding: 24px;
-    width: fit-content;
-    margin:auto;
     margin-bottom: 96px;
 }
 
 guitar-tuner span {
-    color: #252323;
+    color: var(--text-color);
 }
 
 guitar-tuner .leds {
@@ -101,6 +174,7 @@ guitar-tuner .leds {
     justify-content: center;
     gap: 32px;
     color: #242424;
+    margin-bottom: 24px;
 
     .flat, .sharp {
         display: inline-flex;
@@ -131,40 +205,41 @@ guitar-tuner .frequency {
     background: gray;
 }
 
-guitar-tuner .screen{
-    background: #767064;
-    width: 150px;
-    color: #767064;
-    margin:auto;
-    padding: 16px;
-    border-radius: 16px;
+guitar-tuner .note {
+    min-height: 6em;
     display: flex;
-    flex-direction: column;
-    
+    justify-content: center;
+}
 
-    .pitch {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+guitar-tuner #note {
+    text-align: center;
+    font-size: 5em;
+    text-shadow: 
+    0 0 4px #7D8;
+}
+
+guitar-tuner .pitch {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: flex-end;
 }
 
 
-
 guitar-tuner[data-power="true"] {
-    .pitch, .note {
+    /*.pitch, .note {
         color: #26261e;
-    }
+    }*/
 
     .led__sharp.active, .led__flat.active {
     background: rgb(255, 1, 1);
 }
 
+
 .led__accurate.active {
     background: rgb(0, 211, 0);
 }
-    
-     
+       
 }
 
 .power {
