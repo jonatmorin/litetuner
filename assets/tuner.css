@@ -232,7 +232,10 @@ guitar-tuner .note {
 
 guitar-tuner #note {
     text-align: center;
-    font-size: 5em;
+    font-size: 5em; 
+}
+
+guitar-tuner[data-power="true"] #note {
     text-shadow: 
     0 0 4px #7D8;
 }

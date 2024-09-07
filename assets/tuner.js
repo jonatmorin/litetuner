@@ -44,6 +44,8 @@ class GuitarTuner extends HTMLElement {
 
         //turn off pitch screen
         this.querySelector('.pitch').classList.remove('active');
+        const noteDisplay = this.querySelector('#note');
+        noteDisplay.innerHTML = noteDisplay.dataset.inactive;
 
     }
 
@@ -67,12 +69,14 @@ class GuitarTuner extends HTMLElement {
                this.analyserNode.getFloatTimeDomainData(this.audioData);
 
                let pitch = autoCorrelate(this.audioData, this.audioCtx.sampleRate);
-               let noteAsInt = noteFromPitch(pitch);
+               
+               if (pitch < 1000) {
+                let noteAsInt = noteFromPitch(pitch);
+                this.displayCurrentPitch(pitch);
+                this.displayCurrentNote(noteAsInt);
+                this.showTuningAccuracy(pitch, noteAsInt);
+               }
 
-               this.displayCurrentPitch(pitch);
-               this.displayCurrentNote(noteAsInt);
-               this.showTuningAccuracy(pitch, noteAsInt);
-            
             }, 300)
 
     }).catch((err) => {
@@ -82,7 +86,7 @@ class GuitarTuner extends HTMLElement {
 
     showTuningAccuracy(pitch, noteAsInt) {
         let detune = centsOffFromPitch(pitch, noteAsInt);
-        const detuneTolerance = 5;
+        const detuneTolerance = 3;
 
         const ledFlat = this.querySelector('.led__flat');
         const ledSharp = this.querySelector('.led__sharp');
